@@ -1,0 +1,240 @@
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+          format: email
+        name:
+          type: string
+        role:
+          type: string
+          enum: [user, student, instructor, admin]
+      example:
+        id: 5ebac534954b54139806c112
+        email: fake@example.com
+        name: fake name
+        role: user
+
+    Category:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      example:
+        id: 5ebac534954b54139806c112
+        name: fake name
+
+    SubCategory:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      example:
+        id: 5ebac534954b54139806c112
+        name: fake name       
+
+    Course:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        url:
+          type: string
+        urlThumb:
+          type: string
+        fee:
+          type: number
+        discount:
+          type: number
+          default: 0
+        averageRating:
+          type: number
+          default: 0
+        introDescription: 
+          type: string
+        detailDescription:
+          type: string
+        introLectures:
+          type: array
+          default: []
+        comments:
+          type: array
+          default: []
+        instructor:
+          type: string
+        students:
+          type: array
+          default: []
+        updatedAt:
+          type: string
+        status:
+          type: number
+      example:
+        id: 5ebac534954b54139806c112
+        name: fake name 
+        url: https://www.facebook.com/
+        urlThumb: https://www.facebook.com/    
+        fee: 100
+        discount: 0.3
+        averageRating: 4.5
+        introDescription: fake intro description
+        detailDescription: fake detail description  
+        instructor: 609b9838b28d283ef805f15d
+        updatedAt: 2016-05-18T16:00:00Z
+        status: 0
+
+    Section:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        totalTime:
+          type: number
+      example:
+        id: 5ebac534954b54139806c112
+        name: fake name  
+        totalTime: 100     
+        
+    Lecture:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        url:
+          type: string
+        type:
+          type: number
+        lengthTime:
+          type: number
+        isPreview:
+          type: bool
+      example:
+        id: 5ebac534954b54139806c112
+        name: fake name  
+        url: https://www.facebook.com/    
+        type: 0
+        lengthTime: 60
+        isPreview: true    
+        
+    Comment:
+      type: object
+      properties:
+        id:
+          type: string
+        content:
+          type: string
+        rating:
+          type: number
+        user:
+          type: string
+      example:
+        id: 5ebac534954b54139806c112
+        content: fake content  
+        rating: 5    
+        user: 5ebac534954b54139806c112       
+
+    History:
+      type: object
+      properties:
+        id:
+          type: string
+        lecture:
+          type: string
+        course:
+          type: string
+        atTime:
+          type: number
+        status:
+          type: int
+      example:
+        id: 5ebac534954b54139806c112
+        lecture: 5ebac534954b54139806c112 
+        course: 5ebac534954b54139806c112   
+        atTime: 60
+        status: 0
+
+    Token:
+      type: object
+      properties:
+        token:
+          type: string
+        expires:
+          type: string
+          format: date-time
+      example:
+        token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZWJhYzUzNDk1NGI1NDEzOTgwNmMxMTIiLCJpYXQiOjE1ODkyOTg0ODQsImV4cCI6MTU4OTMwMDI4NH0.m1U63blB0MLej_WfB7yC2FTMnCziif9X8yzwDEfJXAg
+        expires: 2020-05-12T16:18:04.793Z
+
+    AuthTokens:
+      type: object
+      properties:
+        access:
+          $ref: '#/components/schemas/Token'
+        refresh:
+          $ref: '#/components/schemas/Token'
+
+    Error:
+      type: object
+      properties:
+        code:
+          type: number
+        message:
+          type: string
+
+  responses:
+    DuplicateEmail:
+      description: Email already taken
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: 400
+            message: Email already taken
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: 401
+            message: Please authenticate
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: 403
+            message: Forbidden
+    NotFound:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: 404
+            message: Not found
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
