@@ -28,9 +28,17 @@ const uploadFile = catchAsync(async (req, res) => {
     throw new ApiError(httpStatus.NOT_FOUND, 'This user was not instructor of course');
   }
 
-  const url = await uploadService.uploadFile(files, courseId);
+  const result = await uploadService.uploadFile(files, courseId);
 
-  res.status(httpStatus.CREATED).send({ url });
+  if (result.length === 0) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Upload file fail');
+  }
+
+  if (result.length === 1) {
+    res.status(httpStatus.CREATED).send({ url: result[0] });
+  } else {
+    res.status(httpStatus.CREATED).send({ url: result });
+  }
 });
 
 module.exports = {
