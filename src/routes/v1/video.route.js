@@ -1,14 +1,14 @@
 const express = require('express');
-const auth = require('../../middlewares/auth');
 const Multer = require('multer');
+const auth = require('../../middlewares/auth');
 const validate = require('../../middlewares/validate');
 const videoValidation = require('../../validations/video.validation');
-const videoController = require('../../controllers/video.controller');
+const uploadController = require('../../controllers/upload.controller');
 
 const multer = Multer({
   storage: Multer.memoryStorage(),
   limits: {
-    fileSize: 5 * 1024 * 1024, // no larger than 5mb, you can change as needed.
+    fileSize: 50 * 1024 * 1024, // no larger than 50mb, you can change as needed.
   },
 });
 
@@ -16,7 +16,7 @@ const router = express.Router();
 
 router
   .route('/')
-  .post(auth('video.upload'), validate(videoValidation.uploadVideo), multer.array('subImage'), videoController.uploadVideo)
+  .post(auth('video.upload'), validate(videoValidation.uploadVideo), multer.array('file'), uploadController.uploadFile);
 
 module.exports = router;
 
@@ -31,7 +31,7 @@ module.exports = router;
  * @swagger
  * /videos:
  *   post:
- *     summary: upload a video 
+ *     summary: upload a video
  *     description: user can upload owner video.
  *     tags: [Videos]
  *     security:
@@ -39,32 +39,25 @@ module.exports = router;
  *     parameters:
  *       - in: query
  *         name: course
- *         require: true
  *         schema:
  *           type: string
  *         description: Course id
  *     requestBody:
- *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             type: object
- *             required:
- *               - name
  *             properties:
- *               name:
+ *               file:
  *                 type: string
- *             example:
- *               name: fake binary url
+ *                 format: binary
  *     responses:
- *       "201":
- *         description: Uploaded
+ *       "200":
+ *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *             type: string
- *             example:
- *               url: fake binary url
+ *                $ref: '#/components/schemas/Video'
  *       "400":
  *         $ref: '#/components/responses/DuplicateEmail'
  *       "401":
@@ -72,5 +65,5 @@ module.exports = router;
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
- * 
+ *
  */

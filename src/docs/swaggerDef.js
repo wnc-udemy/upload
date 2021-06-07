@@ -2,7 +2,7 @@ const { version } = require('../../package.json');
 const config = require('../config/config');
 
 const swaggerDef = {
-  openapi: '3.0.0',
+  openapi: '3.0.10',
   info: {
     title: 'Udemy API documentation',
     version,

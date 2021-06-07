@@ -1,171 +1,20 @@
 components:
   schemas:
-    User:
+    Video:
       type: object
       properties:
-        id:
-          type: string
-        email:
-          type: string
-          format: email
-        name:
-          type: string
-        role:
-          type: string
-          enum: [user, student, instructor, admin]
-      example:
-        id: 5ebac534954b54139806c112
-        email: fake@example.com
-        name: fake name
-        role: user
-
-    Category:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-      example:
-        id: 5ebac534954b54139806c112
-        name: fake name
-
-    SubCategory:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-      example:
-        id: 5ebac534954b54139806c112
-        name: fake name       
-
-    Course:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
         url:
           type: string
-        urlThumb:
-          type: string
-        fee:
-          type: number
-        discount:
-          type: number
-          default: 0
-        averageRating:
-          type: number
-          default: 0
-        introDescription: 
-          type: string
-        detailDescription:
-          type: string
-        introLectures:
-          type: array
-          default: []
-        comments:
-          type: array
-          default: []
-        instructor:
-          type: string
-        students:
-          type: array
-          default: []
-        updatedAt:
-          type: string
-        status:
-          type: number
       example:
-        id: 5ebac534954b54139806c112
-        name: fake name 
-        url: https://www.facebook.com/
-        urlThumb: https://www.facebook.com/    
-        fee: 100
-        discount: 0.3
-        averageRating: 4.5
-        introDescription: fake intro description
-        detailDescription: fake detail description  
-        instructor: 609b9838b28d283ef805f15d
-        updatedAt: 2016-05-18T16:00:00Z
-        status: 0
+        url: https://youtu.be/_Kb83QjSAqA
 
-    Section:
+    Image:
       type: object
       properties:
-        id:
-          type: string
-        name:
-          type: string
-        totalTime:
-          type: number
-      example:
-        id: 5ebac534954b54139806c112
-        name: fake name  
-        totalTime: 100     
-        
-    Lecture:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
         url:
           type: string
-        type:
-          type: number
-        lengthTime:
-          type: number
-        isPreview:
-          type: bool
       example:
-        id: 5ebac534954b54139806c112
-        name: fake name  
-        url: https://www.facebook.com/    
-        type: 0
-        lengthTime: 60
-        isPreview: true    
-        
-    Comment:
-      type: object
-      properties:
-        id:
-          type: string
-        content:
-          type: string
-        rating:
-          type: number
-        user:
-          type: string
-      example:
-        id: 5ebac534954b54139806c112
-        content: fake content  
-        rating: 5    
-        user: 5ebac534954b54139806c112       
-
-    History:
-      type: object
-      properties:
-        id:
-          type: string
-        lecture:
-          type: string
-        course:
-          type: string
-        atTime:
-          type: number
-        status:
-          type: int
-      example:
-        id: 5ebac534954b54139806c112
-        lecture: 5ebac534954b54139806c112 
-        course: 5ebac534954b54139806c112   
-        atTime: 60
-        status: 0
+        url: https://youtu.be/_Kb83QjSAqA
 
     Token:
       type: object

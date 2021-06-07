@@ -3,12 +3,12 @@ const Multer = require('multer');
 const auth = require('../../middlewares/auth');
 const validate = require('../../middlewares/validate');
 const imageValidation = require('../../validations/image.validation');
-const imageController = require('../../controllers/image.controller');
+const uploadController = require('../../controllers/upload.controller');
 
 const multer = Multer({
   storage: Multer.memoryStorage(),
   limits: {
-    fileSize: 5 * 1024 * 1024, // no larger than 5mb, you can change as needed.
+    fileSize: 1 * 1024 * 1024, // no larger than 1mb, you can change as needed.
   },
 });
 
@@ -16,7 +16,7 @@ const router = express.Router();
 
 router
   .route('/')
-  .post(auth('image.create'), validate(imageValidation.uploadImage), multer.array('subImage'), imageController.uploadImage)
+  .post(auth('image.upload'), validate(imageValidation.uploadImage), multer.array('file'), uploadController.uploadFile);
 
 module.exports = router;
 
@@ -29,7 +29,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /image:
+ * /images:
  *   post:
  *     summary: upload a image
  *     description: user can upload owner image.
@@ -39,32 +39,26 @@ module.exports = router;
  *     parameters:
  *       - in: query
  *         name: course
- *         require: true
+ *         required: true
  *         schema:
  *           type: string
  *         description: Course id
  *     requestBody:
- *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             type: object
- *             required:
- *               - name
  *             properties:
- *               name:
+ *               file:
  *                 type: string
- *             example:
- *               name: fake name
+ *                 format: binary
  *     responses:
- *       "201":
- *         description: Uploaded
+ *       "200":
+ *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *             type: string
- *             example:
- *               url: fake binary url
+ *                $ref: '#/components/schemas/Image'
  *       "400":
  *         $ref: '#/components/responses/DuplicateEmail'
  *       "401":
