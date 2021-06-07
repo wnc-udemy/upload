@@ -68,13 +68,13 @@ ingress:
     cert-manager.io/cluster-issuer: 'letsencrypt-prod'
     #kubernetes.io/tls-acme: "true"
   hosts:
-    - host: wnc-backend.farmhub.asia
+    - host: wnc-upload.farmhub.asia
       paths:
         - path: '/'
   tls:
-    - secretName: wnc-backend-tls
+    - secretName: wnc-upload-tls
       hosts:
-        - wnc-backend.farmhub.asia
+        - wnc-upload.farmhub.asia
 
 configmap:
   JWT_SECRET: thisisasamplesecret

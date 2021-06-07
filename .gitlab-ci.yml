@@ -1,7 +1,7 @@
 image: gcr.io/farmhub-313500/ubuntu-custom-image:v1.1.0
 
 variables:
-  IMAGE: back-end-service
+  IMAGE: upload-service
   IMAGE_NAME: $IMAGE-$CI_COMMIT_REF_NAME
   NAMESPACE: wnc-udemy
   HELM_VALUE: $CI_COMMIT_REF_NAME
