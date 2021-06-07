@@ -1,1 +1,2 @@
-module.exports.uploadController = require('./upload.controller');
+module.exports.videoController = require('./video.controller');
+module.exports.imageController = require('./image.controller');

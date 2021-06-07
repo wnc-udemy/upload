@@ -3,7 +3,7 @@ const Multer = require('multer');
 const auth = require('../../middlewares/auth');
 const validate = require('../../middlewares/validate');
 const imageValidation = require('../../validations/image.validation');
-const uploadController = require('../../controllers/upload.controller');
+const imageController = require('../../controllers/image.controller');
 
 const multer = Multer({
   storage: Multer.memoryStorage(),
@@ -16,7 +16,7 @@ const router = express.Router();
 
 router
   .route('/')
-  .post(auth('image.upload'), validate(imageValidation.uploadImage), multer.array('file'), uploadController.uploadFile);
+  .post(auth('image.upload'), validate(imageValidation.uploadImage), multer.array('file'), imageController.uploadFile);
 
 module.exports = router;
 
@@ -36,13 +36,6 @@ module.exports = router;
  *     tags: [Images]
  *     security:
  *       - bearerAuth: []
- *     parameters:
- *       - in: query
- *         name: course
- *         required: true
- *         schema:
- *           type: string
- *         description: Course id
  *     requestBody:
  *       content:
  *         multipart/form-data:

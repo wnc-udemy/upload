@@ -3,7 +3,7 @@ const Multer = require('multer');
 const auth = require('../../middlewares/auth');
 const validate = require('../../middlewares/validate');
 const videoValidation = require('../../validations/video.validation');
-const uploadController = require('../../controllers/upload.controller');
+const videoController = require('../../controllers/video.controller');
 
 const multer = Multer({
   storage: Multer.memoryStorage(),
@@ -16,7 +16,7 @@ const router = express.Router();
 
 router
   .route('/')
-  .post(auth('video.upload'), validate(videoValidation.uploadVideo), multer.array('file'), uploadController.uploadFile);
+  .post(auth('video.upload'), validate(videoValidation.uploadVideo), multer.array('file'), videoController.uploadFile);
 
 module.exports = router;
 
