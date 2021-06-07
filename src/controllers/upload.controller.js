@@ -12,7 +12,7 @@ const uploadFile = catchAsync(async (req, res) => {
 
   const course = JSON.parse(
     await rp.get({
-      url: `${config.urlBackend}courses/${courseId}?type=0`,
+      url: `${config.urlBackend}courses/${courseId}?type=8`,
     })
   );
 
