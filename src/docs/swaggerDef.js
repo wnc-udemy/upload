@@ -16,7 +16,7 @@ const swaggerDef = {
       url: `http://localhost:${config.port}/v1`,
     },
     {
-      url: `https://wnc-backend.farmhub.asia/v1`,
+      url: `https://wnc-upload.farmhub.asia/v1`,
     },
   ],
 };
