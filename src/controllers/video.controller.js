@@ -8,7 +8,7 @@ const { uploadService } = require('../services');
 const uploadFile = catchAsync(async (req, res) => {
   const { files, user } = req;
   const { course: courseId } = req.query;
-  const { id: userId } = user;
+  const { _id: userId } = user;
 
   const course = JSON.parse(
     await rp.get({
