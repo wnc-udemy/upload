@@ -66,7 +66,7 @@ ingress:
     nginx.ingress.kubernetes.io/cors-allow-origin: '*'
     nginx.ingress.kubernetes.io/ssl-redirect: 'true'
     cert-manager.io/cluster-issuer: 'letsencrypt-prod'
-    nginx.ingress.kubernetes.io/proxy-body-size: 8m
+    nginx.ingress.kubernetes.io/proxy-body-size: 50m
     kubernetes.io/tls-acme: "true"
   hosts:
     - host: wnc-upload.farmhub.asia
